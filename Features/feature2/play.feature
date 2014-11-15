@@ -9,12 +9,7 @@ Feature: Playing the game
     When I press "Play"
     Then I should be taken to the "Results" page
 
-  Scenario: Computer Plays
-    Given I have registered
-    Then the computer should play by selecting a random weapon from the same list
-
   Scenario: A Winner Should Be Declared
-    Given I have played and the computer has played
-    When I am on the Result page
+    Given I have played
     Then I should see the computer's play
       And I should see who won
