@@ -1,0 +1,16 @@
+Hello <%= @player_name %>
+
+How do you wish to play?
+
+Please choose a weapon from the menu below:
+
+<form action="/result" method="post">
+<select name ="weapon" placeholder ="Please choose">
+    <option value ="rock">Rock</option>
+    <option value ="paper">Paper</option>
+    <option value ="scissors">Scissors</option>
+</select>
+
+<input type="submit" value="Play">
+
+</form>

@@ -3,11 +3,12 @@ Feature: Starting the game
   As a player at Makers Academy
   I must enter my name
 
-  Scenario: Registering
+  Scenario: Visiting The Home Page
     Given I am on the homepage
-    When I see "Please enter your name"
-    Then I should complete the form
+    Then I should see "Please enter your name"
 
-  Scenario: Getting Ready To Play 
-    Given I have registered
-    Then I should see play options
+  Scenario: Registered
+    Given I am on the homepage
+    When I fill in the form with "Ben"
+      And I click the submit button
+    Then I should be taken to the Play page and see "Ben"

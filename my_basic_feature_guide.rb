@@ -1,3 +1,5 @@
+# MY GUIDANCE : FEATURES & STEP DEFINITIONS
+
 # 1. start with a description of the feature
 # what it's doing, what it's for
 # this is as a reference point for people reading it
@@ -11,3 +13,9 @@
 # Roughly, given describes the internal state of the program
 # When describes what you are doing
 # Then describes what it's like just after it happens
+
+# More General Guidance
+# You need to click buttons
+# These won't be done automatically
+# Pretend this is dumb and is a programming language
+# Tight structures, details will be a good thing to begin with

@@ -5,9 +5,9 @@ Feature: Playing the game
 
   Scenario: Playing
     Given I have registered
-    When I see a list of weapons as options to play
-    Then I should select one weapon from this list
-    Then I should press "Play"
+    When I select a weapon such as "Rock" to play
+    When I press "Play"
+    Then I should be taken to the "Results" page
 
   Scenario: Computer Plays
     Given I have registered
@@ -15,5 +15,6 @@ Feature: Playing the game
 
   Scenario: A Winner Should Be Declared
     Given I have played and the computer has played
+    When I am on the Result page
     Then I should see the computer's play
       And I should see who won
