@@ -19,8 +19,9 @@ class RockPaperScissors < Sinatra::Base
   post '/result' do 
     @weapon = params[:weapon]
     @computer_choice = ComputerPlayer.new.choice
-    Winner.new(@weapon, @computer_choice).the_result_is
-    @result = Winner.new(@weapon, @computer_choice).result
+    game = Winner.new(@weapon, @computer_choice)
+    game.the_result_is
+    @result = game.result
     erb :result
   end
 

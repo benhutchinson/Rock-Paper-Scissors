@@ -1,4 +1,5 @@
-class Winner
+
+class Test
 
   attr_reader :result
 
@@ -23,3 +24,9 @@ class Winner
   end
 
 end
+
+test = Test.new("Rock", "Paper")
+
+test.the_result_is
+
+puts test.result
