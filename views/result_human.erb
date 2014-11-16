@@ -1,0 +1,18 @@
+<meta http-equiv="refresh" content="3">
+
+<h1>Result.</h1>
+
+<% if WEAPONS.count<2 %>
+
+<p>You chose <%= session[:my_weapon] %>.
+Please wait.
+
+<% else %>
+
+<p>You chose <%= session[:my_weapon] %>.
+
+<!-- <p>The opponent chose <%= @opponent_weapon %>. -->
+
+<!-- <p>The winner is ... <%= @result %> -->
+
+<% end %>
