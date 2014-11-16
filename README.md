@@ -1,7 +1,7 @@
 Rock Paper Scissors
 ===================
 
-This was the third weekend challenge set at Makers Academy.  The aim is to write a web-based Rock, Paper, Scissors game.  This will be hosted on Heroku and make use of the Sinatra framework.  We will write the software "outside-in", starting with a definition of the features and scenarios through Cucumber tests.
+This was the third weekend challenge set at Makers Academy.  The aim is to write a web-based Rock, Paper, Scissors game.  This will be hosted on Heroku and make use of the Sinatra framework.  We will write the software "outside-in", starting with a definition of the features and scenarios through Cucumber tests.  My version has been extended to allow for two players.  It should also be published on [Heroku](https://young-crag-7694.herokuapp.com).
 
 ###Technologies
 - Ruby
