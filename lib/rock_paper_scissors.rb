@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require_relative 'computer_choice'
 require_relative 'winner_logic'
+require_relative 'winner_logic_2player'
 require_relative 'player'
 
 
@@ -32,9 +33,10 @@ class RockPaperScissors < Sinatra::Base
       @result = game.result
       erb :result
     else 
-      session[:me] = Player.new(session[:my_name], params[:weapon])
+      my_player = Player.new(session[:my_name], params[:weapon])
       session[:my_weapon] = params[:weapon]
-      PLAYERS << session[:me]
+      session[:my_id] = my_player.object_id
+      PLAYERS << my_player
       WEAPONS << session[:my_weapon]
 
       # problem I am having.
@@ -42,9 +44,15 @@ class RockPaperScissors < Sinatra::Base
       # always seems to create a new one
       # PLAYERS array stays constant though
 
-      p session[:me]
-      p session
-      p PLAYERS
+      # p session[:me]
+      # p session
+      # p PLAYERS
+      # p session[:my_id]
+      
+      # problem I am having.
+      # session[:me] is not recognising the specific player here
+      # seems to create a new one
+      # PLAYERS array stays constant though
 
       redirect '/waiting'
     end
@@ -52,25 +60,12 @@ class RockPaperScissors < Sinatra::Base
 
   get '/waiting' do
     if WEAPONS.count == 2
-
-      p session[:me]
-
-      # problem I am having.
-      # session[:me] is not recognising the specific player here
-      # seems to create a new one
-      # PLAYERS array stays constant though
-
-      p PLAYERS
-
-      find_opponent = PLAYERS.select {|player| player != session[:me] }
+      find_opponent = PLAYERS.select {|player| player.object_id != session[:my_id] }
       @opponent = find_opponent[0]
       @opponent_weapon = @opponent.weapon
-
-      p @opponent_weapon
-      p session[:my_weapon]
-      # game = Winner.new(session[:my_weapon], @opponent_weapon)
-      # game.the_result_is
-      # @result = game.result
+      game = Winner2Player.new(session[:my_weapon], @opponent_weapon)
+      game.the_result_is
+      @result = game.result
     else
     end      
     erb :result_human
