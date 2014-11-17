@@ -5,3 +5,9 @@
 <p>The <%= session[:opponent] %> chose <%= @computer_choice %>.
 
 <p>The winner is ... <%= @result %>
+
+<form action="/reset" method="post">
+
+<input type="submit" value="Let's Play Again">
+
+</form>

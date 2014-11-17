@@ -17,6 +17,12 @@ class RockPaperScissors < Sinatra::Base
     erb :index
   end
 
+  get '/reset' do
+    PLAYERS = []
+    WEAPONS = []
+    redirect '/'
+  end
+
   post '/registration' do 
     @player_name = params[:player_name]
     session[:opponent] = params[:opponent]
@@ -39,20 +45,25 @@ class RockPaperScissors < Sinatra::Base
       PLAYERS << my_player
       WEAPONS << session[:my_weapon]
 
-      # problem I am having.
-      # session[:me] is not recognising the specific player
-      # always seems to create a new one
+      # Problem I Was Having Initially
+      # before I created session[:my_id]
+      # i would assign session[:me] to the new player
+      # session[:me] in './waiting', session[:me] did not appear to reference the specific one
+      # i.e. always seems to create a new one
       # PLAYERS array stays constant though
+      # object_id was best way around this
 
-      # p session[:me]
-      # p session
-      # p PLAYERS
-      # p session[:my_id]
-      
-      # problem I am having.
-      # session[:me] is not recognising the specific player here
-      # seems to create a new one
-      # PLAYERS array stays constant though
+      # Lesson '1'
+      # You should not attach objects to sessions given file size requirements too
+      # using their IDs is a better solution
+      # alas, databases in future study may also provide better solutions
+
+      # Lesson '2'
+      # A Game class could be defined at the outset and designed
+      # GAME = Game.new
+      # player = Player.new(params[:player_name])
+      # GAME.add(player)
+      # GAME.winner could also be deployed in the /waiting section
 
       redirect '/waiting'
     end
@@ -69,6 +80,16 @@ class RockPaperScissors < Sinatra::Base
     else
     end      
     erb :result_human
+  end
+
+  post '/reset' do 
+    PLAYERS = []
+    WEAPONS = []
+    redirect '/'
+
+    # this allows a "reset" to occur after two players have played
+    # hence no formal Heroku refresh required
+
   end
 
   # start the server if ruby file executed directly
