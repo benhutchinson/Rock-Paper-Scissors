@@ -2,24 +2,33 @@ class Winner
 
   attr_reader :result
 
-  def initialize(player_choice, computer_choice)
+  def initialize(player_choice, opponent_choice, opponent_name)
     @player_choice = player_choice
-    @computer_choice = computer_choice
+    @opponent_choice = opponent_choice
+    @opponent_name = opponent_name
     @result
   end
 
   def the_result_is
-    if @computer_choice == @player_choice
+    if @opponent_choice == @player_choice
       @result = "It's A Draw"
-    elsif @computer_choice == "Rock" && @player_choice == "Scissors"
-      @result = "Computer wins"
-    elsif @computer_choice == "Scissors" && @player_choice == "Paper"
-      @result = "Computer wins"
-    elsif @computer_choice == "Paper" && @player_choice == "Rock"
-      @result = "Computer wins"
+    elsif opponent_wins?
+      @result = @opponent_name + " wins"
     else
       @result = "You win"
     end
   end
 
+  def opponent_wins?
+    if @opponent_choice == "Rock" && @player_choice == "Scissors"
+      true
+    elsif @opponent_choice == "Scissors" && @player_choice == "Paper"
+      true
+    elsif @opponent_choice == "Paper" && @player_choice == "Rock"
+      true
+    else 
+      false
+    end
+  end
+  
 end

@@ -1,9 +1,7 @@
 require 'sinatra/base'
 require_relative 'computer_choice'
 require_relative 'winner_logic'
-require_relative 'winner_logic_2player'
 require_relative 'player'
-
 
 class RockPaperScissors < Sinatra::Base
 
@@ -34,7 +32,7 @@ class RockPaperScissors < Sinatra::Base
     if session[:opponent]== "Computer"
       @weapon = params[:weapon]
       @computer_choice = ComputerPlayer.new.choice
-      game = Winner.new(@weapon, @computer_choice)
+      game = Winner.new(@weapon, @computer_choice, "Computer")
       game.the_result_is
       @result = game.result
       erb :result
@@ -44,6 +42,7 @@ class RockPaperScissors < Sinatra::Base
       session[:my_id] = my_player.object_id
       PLAYERS << my_player
       WEAPONS << session[:my_weapon]
+      redirect '/waiting'
 
       # Problem I Was Having Initially
       # before I created session[:my_id]
@@ -65,16 +64,14 @@ class RockPaperScissors < Sinatra::Base
       # GAME.add(player)
       # GAME.winner could also be deployed in the /waiting section
 
-      redirect '/waiting'
     end
   end
 
   get '/waiting' do
     if WEAPONS.count == 2
       find_opponent = PLAYERS.select {|player| player.object_id != session[:my_id] }
-      @opponent = find_opponent[0]
-      @opponent_weapon = @opponent.weapon
-      game = Winner2Player.new(session[:my_weapon], @opponent_weapon)
+      @opponent_weapon = find_opponent[0].weapon
+      game = Winner.new(session[:my_weapon], @opponent_weapon, "The other player")
       game.the_result_is
       @result = game.result
     else
