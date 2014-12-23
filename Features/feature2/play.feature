@@ -5,7 +5,7 @@ Feature: Playing the game
 
   Scenario: Playing
     Given I have registered
-    When I select a weapon such as "Rock" to play
+    When I select a weapon to play
     When I press "Play"
     Then I should be taken to the "Results" page
 

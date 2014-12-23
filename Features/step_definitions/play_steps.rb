@@ -4,7 +4,7 @@ Given(/^I have registered$/) do
   step "I click the submit button"
 end
 
-When(/^I select a weapon such as "Rock" to play$/) do
+When(/^I select a weapon to play$/) do
   select('Rock', :from => "weapon")
 end
 
@@ -18,13 +18,13 @@ end
 
 Given(/^I have played$/) do
   step "I have registered"
-  step 'I select a weapon such as "Rock" to play'
+  step 'I select a weapon to play'
   step 'I press "Play"'
   step 'I should be taken to the "Results" page'
 end
 
 Then(/^I should see the computer's play$/) do
-  expect(page).to have_content("The computer chose")
+  expect(page).to have_content("The Computer chose")
 end
 
 Then(/^I should see who won$/) do
